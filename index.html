@@ -25,16 +25,21 @@ body{
   text-align:center;
   box-shadow:0 20px 40px rgba(0,0,0,.25);
   max-width:520px;
+  z-index:2;
 }
 
 .photo{
-  width:170px;
-  height:170px;
+  width:180px;
+  height:180px;
   border-radius:50%;
   object-fit:cover;
   border:6px solid #ff4d6d;
   margin-bottom:15px;
+  box-shadow:0 0 25px #ff4d6d;
 }
+
+h1{margin:10px 0}
+p{font-size:18px}
 
 button{
   padding:12px 22px;
@@ -43,7 +48,10 @@ button{
   border-radius:14px;
   cursor:pointer;
   margin:10px;
+  transition:.2s;
 }
+
+button:hover{transform:scale(1.1)}
 
 #yesBtn{background:#ff4d6d;color:white}
 #noBtn{background:#888;color:white;position:relative}
@@ -54,10 +62,21 @@ button{
   top:-10px;
   font-size:24px;
   animation:fall linear forwards;
+  z-index:1;
 }
 
 @keyframes fall{
   to{transform:translateY(110vh);opacity:0}
+}
+
+.bigYes{
+  font-size:42px;
+  animation:pop .6s ease forwards;
+}
+
+@keyframes pop{
+  from{transform:scale(.4)}
+  to{transform:scale(1.2)}
 }
 </style>
 </head>
@@ -71,7 +90,10 @@ src="https://raw.githubusercontent.com/nihalgg4-a11y/valentine1/main/emu.JPG">
 
 <h1>Hey Emu 😄❤️</h1>
 
-<p>Scientific study says you + me = Valentine date 😌</p>
+<p>
+Official research confirms:<br>
+You are extremely Valentine-material 😌
+</p>
 
 <h2>Will you be my Valentine? 💌</h2>
 
@@ -83,35 +105,43 @@ src="https://raw.githubusercontent.com/nihalgg4-a11y/valentine1/main/emu.JPG">
 </div>
 
 <script>
-// hearts
+// ❤️ Falling hearts
 function heart(){
  const h=document.createElement("div");
  h.className="heart";
- h.innerHTML="❤️";
+ h.innerHTML=["❤️","💖","💘","💗"][Math.floor(Math.random()*4)];
  h.style.left=Math.random()*100+"vw";
  h.style.animationDuration=(3+Math.random()*3)+"s";
+ h.style.fontSize=(18+Math.random()*20)+"px";
  document.body.appendChild(h);
  setTimeout(()=>h.remove(),6000);
 }
-setInterval(heart,200);
+setInterval(heart,180);
 
-// running no
+// 😂 Running NO button
 noBtn.onmouseover=()=>{
- noBtn.style.transform=`translate(${Math.random()*300-150}px,${Math.random()*200-100}px)`
+ noBtn.style.transform=`translate(${Math.random()*320-160}px,${Math.random()*220-110}px)`
 };
+noBtn.onclick=()=> noBtn.innerText="Nice try 😜";
 
-// yes click
+// 🎉 YES celebration
 yesBtn.onclick=()=>{
- card.innerHTML="<h1>YAAAY ❤️🎉<br>Best Valentine Ever</h1>";
+ card.innerHTML=`
+   <h1 class="bigYes">SHE SAID YES!! 🎉❤️</h1>
+   <p>Best Valentine Ever Unlocked 😄🍫🌹</p>
+ `;
+ for(let i=0;i<40;i++) setTimeout(heart,i*80);
 };
 
-// music button (user click = allowed)
+// 🎵 Music button (safe for browsers)
 musicBtn.onclick=()=>{
- const a=document.createElement("iframe");
- a.src="https://www.youtube.com/embed/QLCpqdqeoII?autoplay=1&loop=1&playlist=QLCpqdqeoII";
- a.style.width="1px";
- a.style.height="1px";
- document.body.appendChild(a);
+ const f=document.createElement("iframe");
+ f.src="https://www.youtube.com/embed/QLCpqdqeoII?autoplay=1&loop=1&playlist=QLCpqdqeoII";
+ f.style.width="1px";
+ f.style.height="1px";
+ f.style.opacity="0.01";
+ f.style.position="fixed";
+ document.body.appendChild(f);
  musicBtn.innerText="Music Playing 🎶";
 };
 </script>
