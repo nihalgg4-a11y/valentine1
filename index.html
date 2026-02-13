@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Emu ❤️ Valentine</title>
+<title>Valentine 💘</title>
 
 <style>
 body{
@@ -82,23 +82,26 @@ button:hover{transform:scale(1.1)}
 
 <h1>Hey Emu 😄❤️</h1>
 
-<p>
-Emergency Valentine Question Incoming…
-</p>
+<p>You have been selected for Valentine duty 💌</p>
 
-<h2>Will you be my Valentine? 💌</h2>
+<h2>Will you be my Valentine?</h2>
 
 <button id="yes">YES 😍</button>
 <button id="no">No 🙈</button>
 
-<audio id="song" src="music.mp3"></audio>
+<audio id="song" preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
 </div>
 
 <script>
+const yesBtn = document.getElementById("yes");
+const noBtn = document.getElementById("no");
+const card = document.getElementById("card");
 const song = document.getElementById("song");
 
-// hearts rain
+// falling hearts
 function heart(){
  const h=document.createElement("div");
  h.className="heart";
@@ -111,25 +114,27 @@ function heart(){
 setInterval(heart,180);
 
 // running NO button
-no.onmouseover=()=>{
- no.style.transform=`translate(${Math.random()*320-160}px,${Math.random()*220-110}px)`
+noBtn.onmouseover = () => {
+ noBtn.style.transform =
+  `translate(${Math.random()*320-160}px,${Math.random()*220-110}px)`
 };
 
-no.onclick=()=>{
- no.innerText="System error — try YES 😜";
-};
-
-// YES click → play music + celebration
-yes.onclick=()=>{
+// YES click = play song + celebration
+yesBtn.onclick = () => {
  song.currentTime = 0;
- song.play();
+ song.play().catch(e => alert("Music failed to play"));
 
  card.innerHTML = `
    <div class="big">SHE SAID YES!! 🎉❤️</div>
-   <p>Valentine Mode Activated 💘😄</p>
+   <p>Valentine Mode Activated 💘</p>
  `;
 
  for(let i=0;i<50;i++) setTimeout(heart,i*70);
+};
+
+// NO click joke
+noBtn.onclick = () => {
+ noBtn.innerText = "Nice try 😜";
 };
 </script>
 
