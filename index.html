@@ -50,7 +50,6 @@ button:hover{transform:scale(1.1)}
 
 #yes{background:#ff4d6d;color:white}
 #no{background:#666;color:white;position:relative}
-#music{background:black;color:white}
 
 .heart{
  position:fixed;
@@ -84,34 +83,24 @@ button:hover{transform:scale(1.1)}
 <h1>Hey Emu 😄❤️</h1>
 
 <p>
-Breaking news just dropped:<br>
-You are officially<br>
-⭐ Certified Valentine Material ⭐
+Urgent notice:<br>
+You have been selected for<br>
+💘 Valentine Duty 💘
 </p>
 
 <h2>Will you be my Valentine? 💌</h2>
 
-<button id="musicBtn">Play Music 🎵</button><br>
-
 <button id="yes">YES 😍</button>
 <button id="no">No 🙈</button>
 
-<audio id="song">
-  <source src="The Weeknd, Ariana Grande - Die For You (Remix Lyric Video).mp3" type="audio/mpeg">
-</audio>
+<audio id="song" src="music.mp3"></audio>
 
 </div>
 
 <script>
 const song = document.getElementById("song");
 
-// 🎵 music — browser safe
-musicBtn.onclick = () => {
-  song.play();
-  musicBtn.innerText = "Playing 🎶";
-};
-
-// ❤️ hearts rain
+// ❤️ hearts
 function heart(){
  const h=document.createElement("div");
  h.className="heart";
@@ -128,15 +117,20 @@ no.onmouseover=()=>{
  no.style.transform=`translate(${Math.random()*320-160}px,${Math.random()*220-110}px)`
 };
 
-no.onclick=()=> no.innerText="Nice try 😜";
-
-// 🎉 YES celebration
+// 🎉 YES click → play music + celebration
 yes.onclick=()=>{
+ song.play();
  card.innerHTML = `
    <div class="big">SHE SAID YES!! 🎉❤️</div>
-   <p>Valentine Mission Successful 😎💘</p>
+   <p>Best Valentine Ever 😄💘</p>
  `;
  for(let i=0;i<50;i++) setTimeout(heart,i*70);
+};
+
+// 😜 NO click → also play music + tease
+no.onclick=()=>{
+ song.play();
+ no.innerText="Still counting as YES 😏";
 };
 </script>
 
